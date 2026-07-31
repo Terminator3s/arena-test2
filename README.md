@@ -1,12 +1,61 @@
-# arena-test2
+# سامانه محاسبات و طراحی تیرچه بتنی (Joist Design & Calculation Software)
 
-Repository prepared for uploading and analyzing Excel data files.
+یک نرم‌افزار دسکتاپ حرفه‌ای و استاندارد برای محاسبات، تحلیل و طراحی تیرچه‌های بتنی (مبتنی بر مبحث ۹ مقررات ملی ساختمان - ویرایش ۱۳۹۹ و ACI 209).
 
-## How to upload your Excel file on GitHub:
+این پروژه به عنوان یک اپلیکیشن کامل و مستقل ویندوزی در زبان **C#** و فریمورک **WPF (.NET 8.0)** پیاده‌سازی شده است.
 
-1. Go to the main page of this repository on GitHub: [Terminator3s/arena-test2](https://github.com/Terminator3s/arena-test2)
-2. Navigate to the `data/` folder (or click **Add file** -> **Upload files**).
-3. Drag and drop your Excel file (`.xlsx`, `.xls`, `.csv`) into the browser.
-4. Click **Commit changes**.
+---
 
-Once uploaded, let me know and I will process the file for you!
+## ویژگی‌ها و قابلیت‌های اصلی
+
+- **رابط کاربری کاملاً فارسی و RTL**: طراحی مدرن، روان و راست‌چین متناسب با مهندسین عمران و محاسبین سازه.
+- **موتور محاسباتی مستقل**: تبدیل دقیق فرمول‌ها و محاسبات صفحه اکسل مرجع (`hoseinzadeh-joist-1399-ACI209.xlsx`) به کد ساختاریافته C#.
+- **تحلیل جامع**:
+  - محاسبه مدول الاستیسیته بتن ($E_c$) و نسبت مدول ($n$)
+  - کنترل لنگر ترک‌خوردگی ($M_{cr}$)
+  - محاسبه لنگرهای خمشی ناشی از بار مرده بتن، کف‌سازی، تیغه‌بندی و بار زنده
+  - تحلیل خیز و خزش بتن در بلندمدت
+  - کنترل‌های پانچ دال رویه، مقاومت خمشی و لرزش سقف
+- **اعتبارسنجی ورودی‌ها**: جلوگیری از ورود مقادیر نامعتبر یا منفی با پیام‌های خطای فارسی.
+- **خروجی اکسل حرفه‌ای**: قابلیت ذخیره تمام ورودی‌ها و نتایج در قالب فایل استاندارد `.xlsx` بدون نیاز به نصب بودن برنامه اکسل (با استفاده از کتابخانه ClosedXML).
+
+---
+
+## ساختار پروژه (Clean Architecture)
+
+- **`JoistCalculator.Core`**: لایه منطق محاسباتی، مدل‌های داده، اعتبارسنجی و سرویس خروجی اکسل.
+- **`JoistCalculator.UI`**: لایه رابط کاربری (WPF) مبتنی بر الگوی MVVM با تم روشن و حرفه‌ای.
+
+---
+
+## نیازمندی‌های سیستم (برای توسعه و اجرا)
+
+- **.NET 8.0 SDK** (یا بالاتر)
+- **Windows 10 / 11** (جهت اجرای اپلیکیشن دسکتاپ WPF)
+
+---
+
+## نحوه ساخت و اجرای پروژه
+
+1. مخزن را کلون کرده یا سورس کد را باز کنید.
+2. برای باز کردن و ساخت پروژه در ویژوال استودیو:
+   - فایل `JoistCalculator.sln` را باز کنید.
+   - پروژه `JoistCalculator.UI` را به عنوان Startup Project تنظیم کنید.
+   - کلید `F5` را بزنید تا برنامه اجرا شود.
+
+3. از طریق خط فرمان (CLI):
+   ```bash
+   dotnet build JoistCalculator.sln
+   dotnet run --project JoistCalculator.UI/JoistCalculator.UI.csproj
+   ```
+
+---
+
+## انتشار به عنوان فایل اجرایی مستقل (Standalone `.exe`)
+
+برای ساخت نسخه اجرایی بدون نیاز به نصب دات‌نت بر روی سیستم مقصد:
+```bash
+dotnet publish JoistCalculator.UI/JoistCalculator.UI.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
+```
+فایل `.exe` نهایی در مسیر زیر ایجاد خواهد شد:
+`JoistCalculator.UI/bin/Release/net8.0-windows/win-x64/publish/JoistCalculator.UI.exe`
