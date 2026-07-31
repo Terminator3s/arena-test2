@@ -12,7 +12,7 @@ namespace JoistCalculator.Core.Services
             var ws = workbook.Worksheets.Add("نتایج محاسبات تیرچه");
 
             // Setup RTL view
-            ws.SheetView.RightToLeft = true;
+            ws.RightToLeft = true;
 
             // Title
             ws.Cell("A1").Value = "گزارش محاسبات و طراحی تیرچه بتنی (مقررات ملی ساختمان - مبحث ۹ / ACI 209)";
